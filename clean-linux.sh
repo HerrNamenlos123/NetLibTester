@@ -4,7 +4,12 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 echo "Cleaning project..."
 
+echo "Cleaning bin directory..."
 rm -rf "$SCRIPT_DIR/bin"
+echo "Cleaning build directory..."
 rm -rf "$SCRIPT_DIR/build"
+
+echo "Cleaning NetLib submodule..."
+$SCRIPT_DIR/modules/NetLib/clean-linux.sh
 
 echo "Done"
