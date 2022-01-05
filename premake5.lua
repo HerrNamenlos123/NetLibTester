@@ -8,8 +8,8 @@ if projectName == nil then print("The project name was not specified! --projectn
 workspace (projectName)
     configurations { "Debug", "Release" }
 
-    --platforms { "x86", "x64" }
-    --defaultplatform "x86"
+    platforms { "x86", "x64" }
+    defaultplatform "x64"
     startproject (projectName)
     
     filter "system:not windows"
@@ -27,13 +27,19 @@ project (projectName)
     staticruntime "on"
     location "build"
     targetdir "bin/%{cfg.buildcfg}"
-    targetname (projectName)
+    targetname "%{prj.name}"
 
     pchheader "pch.h"
     pchsource "src/pch.cpp"
 
     -- Configuration filters, filters are active up to the next filter statement
     -- Indentation is purely visual
+    
+    filter { "platforms:x86" }
+        architecture "x86"
+
+    filter { "platforms:x64" }
+        architecture "x86_64"
 
     filter "configurations:Debug"
         defines { "DEBUG", "_DEBUG", "NDEPLOY" }
